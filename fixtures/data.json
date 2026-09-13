@@ -1,0 +1,16 @@
+{
+  "mercadolibreWeb": "https://www.mercadolibre.com.ar/",
+  "product": "Termo Stanley",
+  "sauceDemo": {
+    "url": "https://www.saucedemo.com/",
+    "user": "standard_user",
+    "pass": "secret_sauce",
+    "customer": {
+      "firstName": "María",
+      "lastName": "Lopez",
+      "postalCode": "5500"
+    },
+    "productsTitle": "Products",
+    "successOrderMessage": "Thank you for your order!"
+  }
+}
