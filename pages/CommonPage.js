@@ -1,13 +1,20 @@
-export class BasePage {
-  /**
-   * @param {import('@playwright/test').Page} page
-   */
+import { expect } from '@playwright/test';
+
+export class CommonPage {
+
   constructor(page) {
     this.page = page;
   }
 
+  //navigate
+  
   async navigateTo(url) {
     await this.page.goto(url);
+  }
+
+  //Verificaction
+  async assertText(selector, expectedText) {
+    await expect(this.page.locator(selector)).toHaveText(expectedText);
   }
 
 //   async type(locator, text) {

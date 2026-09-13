@@ -1,16 +1,17 @@
 {
-  "mercadolibreWeb": "https://www.mercadolibre.com.ar/",
-  "product": "Termo Stanley",
   "sauceDemo": {
     "url": "https://www.saucedemo.com/",
     "user": "standard_user",
-    "pass": "secret_sauce",
+    "password": "secret_sauce",
     "customer": {
-      "firstName": "María",
+      "firstName": "Mercedes",
       "lastName": "Lopez",
       "postalCode": "5500"
     },
     "productsTitle": "Products",
-    "successOrderMessage": "Thank you for your order!"
+    "successOrderMessage": "Thank you for your order!",
+    "product1": "sauce-labs-backpack",
+    "product2": "sauce-labs-bike-light",
+    "product3": "sauce-labs-bolt-t-shirt"
   }
 }

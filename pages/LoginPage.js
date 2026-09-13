@@ -3,14 +3,15 @@ export class LoginPage {
     this.page = page;
 
     this.elements = {
-      userNameInput: page.locator('id="user-name"'),
-      passwordInput: page.locator('id="password"'),
-      loginButton: page.locator('id="login-button"'),
+      userNameInput: page.locator('#user-name'),
+      passwordInput: page.locator('#password'),
+      loginButton: page.locator('#login-button'),
     };
   }
 
   async login(userName, password){
-    await this.userNameInput.fill(userName);
-    await this.passwordInput.fill(password);
+    await this.elements.userNameInput.fill(userName);
+    await this.elements.passwordInput.fill(password);
+    await this.elements.loginButton.click();
   }
 }
