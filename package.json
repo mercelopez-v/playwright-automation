@@ -1,15 +1,20 @@
 {
   "name": "playwright",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "scripts": {},
+  "type": "commonjs",
+  "scripts": {
+    "test": "playwright test",
+    "test:file": "playwright test",
+    "report": "allure generate allure-results --clean -o allure-report && allure open allure-report"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.60.0",
-    "@types/node": "^25.6.2"
+    "@types/node": "^25.6.2",
+    "allure-commandline": "^2.43.0",
+    "allure-playwright": "^3.12.1"
   }
 }
