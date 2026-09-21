@@ -5,33 +5,56 @@ import { ProductsPage } from '../pages/ProductsPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import testData from '../fixtures/data.json';
 
-test('Test 3: Flujo completo de compra (SauceDemo)', async ({ page }) => {
+const buildSauceDemoContext = (page) => {
   const data = testData.sauceDemo;
-  const login = new LoginPage(page);
-  const common = new CommonPage(page);
-  const products = new ProductsPage(page);
-  const checkout = new CheckoutPage(page);
 
-  // 1. Navegar a la plataforma
-  await common.navigateTo(data.url);
+  return {
+    data,
+    login: new LoginPage(page),
+    common: new CommonPage(page),
+    products: new ProductsPage(page),
+    checkout: new CheckoutPage(page),
+  };
+};
 
-  // 2. Iniciar sesión
-  await login.login(data.user, data.password);
+test.beforeEach(async ({ page }) => {
+  const sauce = buildSauceDemoContext(page);
 
-  // 3. Validar catálogo y agregar producto
-  await common.assertText(products.elements.title,data.productsTitle)
-  await products.addProductToCart(data.product1);
-  await products.goToCart();
+  await sauce.common.navigateTo(sauce.data.url);
+  await sauce.login.login(sauce.data.user, sauce.data.password);
+});
 
-  // 4. Iniciar checkout y completar formulario
-  await checkout.startCheckout();
-  await checkout.fillCustomerInformation(
-    data.customer.firstName,
-    data.customer.lastName,
-    data.customer.postalCode
+test('Test 3: Flujo completo de compra (SauceDemo)', async ({ page }) => {
+  const sauce = buildSauceDemoContext(page);
+
+  await sauce.common.assertText(sauce.products.elements.title, sauce.data.productsTitle);
+  await sauce.products.addProductToCart(sauce.data.product1);
+  await sauce.products.goToCart();
+
+  await sauce.checkout.startCheckout();
+  await sauce.checkout.fillCustomerInformation(
+    sauce.data.customer.firstName,
+    sauce.data.customer.lastName,
+    sauce.data.customer.postalCode
   );
 
-  // 5. Finalizar orden y validar mensaje de éxito
-  await checkout.finishOrder();
-  await expect(checkout.elements.completeHeader).toHaveText(data.successOrderMessage);
+  await sauce.checkout.finishOrder();
+  await expect(sauce.checkout.elements.completeHeader).toHaveText(sauce.data.successOrderMessage);
+});
+
+test('Test 4: Agregar product1, product2 y product3 y remover product3 del carrito (SauceDemo)', async ({ page }) => {
+  const sauce = buildSauceDemoContext(page);
+
+  await sauce.common.assertText(sauce.products.elements.title, sauce.data.productsTitle);
+
+  await sauce.products.addProductToCart(sauce.data.product1);
+  await sauce.products.addProductToCart(sauce.data.product2);
+  await sauce.products.addProductToCart(sauce.data.product3);
+
+  await sauce.products.goToCart();
+  await sauce.products.assertCartItemsCount(3);
+
+  await sauce.products.removeProductFromCart(sauce.data.product3);
+  await sauce.products.assertCartItemsCount(2);
+  await sauce.products.assertProductVisibleInCart(sauce.data.productNames[sauce.data.product3], false);
 });

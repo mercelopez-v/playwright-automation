@@ -12,6 +12,11 @@
     "successOrderMessage": "Thank you for your order!",
     "product1": "sauce-labs-backpack",
     "product2": "sauce-labs-bike-light",
-    "product3": "sauce-labs-bolt-t-shirt"
+    "product3": "sauce-labs-bolt-t-shirt",
+    "productNames": {
+      "sauce-labs-backpack": "Sauce Labs Backpack",
+      "sauce-labs-bike-light": "Sauce Labs Bike Light",
+      "sauce-labs-bolt-t-shirt": "Sauce Labs Bolt T-Shirt"
+    }
   }
 }
